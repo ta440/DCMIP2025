@@ -1,0 +1,50 @@
+! Template user_nl_cam for test cases 2a and 2b and the FV3 dycore
+
+! Choose which case:
+!analytic_ic_type = 'gap_horiz_mount_flow'
+analytic_ic_type = 'vortex_horiz_mount_flow'
+
+fv3_hydrostatic = .FALSE. ! set to FALSE for nonhydrostatic, TRUE for hydrostatic
+  
+write_nstep0 = .TRUE. ! Output the initial condition
+empty_htapes = .TRUE.
+avgflag_pertape = 'I'
+fincl1 = 'U', 'V', 'T', 'OMEGA', 'PS', 'PHIS', 'Z3'
+MFILT = 100
+NDENS = 2
+
+! For ATM_NCPL = 1920:
+NHTFRQ = 48 ! Output every 0.5 standard Earth days
+NHTFRQ = 24 ! Output every 0.25 standard Earth days
+
+! For ATM_NCPL = 3840:
+NHTFRQ = 96 ! Output every 0.5 standard Earth days
+NHTFRQ = 48 ! Output every 0.25 standard Earth days
+
+! Switch to sixth-order divergence damping, which
+! is more stable than eighth-order
+fv3_nord = 2
+
+! Add vorticity damping for stability. 
+fv3_do_vort_damp = .TRUE.
+fv3_vtdm4 = 0.05
+
+! Turn off the inbuilt RF and sponge layers
+fv3_tau = 0.0
+fv3_d2_bg_k1 = 0.0
+fv3_d2_bg_k2 = 0.0
+  
+! Remove T perturbations with the 
+! Held-Suarez compset
+pertlim = 0.0
+
+! Small Earth of X=20
+rearth = 318561 ! Scale by 1/X, base value is 6371220 m
+
+! Set the Earth's rotation rate. 
+! Set either omega=0 (no rotation) or sday (with rotation).
+omega = 0 ! No Coriolis
+!sday = 4308.2 ! With Coriolis. Defines omega=2*pi/sday. Scale by 1/X, with the base sday is 86164.1 s.
+
+! 30 km stretched grid. Change this is testing a different vertical resolution.
+NCDATA='/glade/u/home/timand/vertical_grids/cam_vcoords_horiz_mount_flow_stretch_dzlow300m_top30km_L38.nc'
