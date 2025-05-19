@@ -1,0 +1,49 @@
+# To record the xmlchanges for the horizontal mountain flow
+# cases for DCMIP 2025.
+# These use a small earth factor of X=20.
+
+./xmlchange DOUT_S=FALSE,\
+REST_OPTION=none,\
+STOP_OPTION=nsteps
+
+# 1 degree resolutions: ne30, C96, mpasa120
+./xmlchange ATM_NCPL=960
+  
+# 0.5 degree resolutions: ne60, C192, mpasa60
+./xmlchange ATM_NCPL=1920
+
+# FV3 0.5 degree (C192) by default has an incorrect 
+# domain decomposition, so need to change this
+./xmlchange NTASKS=384
+
+# For the gap flow, equivalent of 10 standard Earth days
+./xmlchange STOP_N=480 # 1 degree
+./xmlchange STOP_N=960 # 0.5 degree
+
+# For the vortex street, the equivalent of 20 standard Earth days
+./xmlchange STOP_N=1920 # 1 degree
+./xmlchange STOP_N=3840 # 0.5 degree
+
+# Use the Held-Suarez compset to enable modified Rayleigh Friction
+./xmlchange --file env_build.xml --id CAM_CONFIG_OPTS --val \
+"--phys held_suarez --analytic_ic"
+
+# Change the number of nodes/processors  if needed;
+# only do so for 0.5 degree runs.
+# This is necessary for FV3, C192, as the CAM
+# default decomposition doesn't work.
+./xmlchange NTASKS=512 # se, mpas
+./xmlchange NTASKS=384 # FV3 needs 3/4 for its domain decomposition
+
+./xmlchange JOB_WALLCLOCK_TIME=01:00:00
+
+# 30 km stretched grid
+./xmlchange --append --file env_build.xml --id CAM_CONFIG_OPTS \
+--val="-nlev=38"
+
+# Set up the case:
+case.setup
+
+# Copy across the Held-Saurez routines for the RF layer:
+cp /glade/u/home/timand/CAM_6_4_060_06032025/cases/cam_6_4_060_horiz_mount_flow_se_ne60_L30km_L57/SourceMods/src.cam/held_suarez_1994.F90 ./SourceMods/src.cam/held_suarez_1994.F90
+cp /glade/u/home/timand/CAM_6_4_060_06032025/cases/cam_6_4_060_horiz_mount_flow_se_ne60_L30km_L57/SourceMods/src.cam/held_suarez_cam.F90 ./SourceMods/src.cam/held_suarez_cam.F90
