@@ -1,0 +1,26 @@
+! xml changes for test case 1
+
+./xmlchange DOUT_S=FALSE,\
+REST_OPTION=none
+
+./xmlchange STOP_N=5
+
+./xmlchange ATM_NCPL=96
+
+# Use the Held-Suarez compset to enable modified Rayleigh Friction
+./xmlchange --file env_build.xml --id CAM_CONFIG_OPTS --val \
+"--phys held_suarez --analytic_ic"
+
+./xmlchange JOB_WALLCLOCK_TIME=00:40:00
+
+# Modify for the number of levels you want
+./xmlchange --append --file env_build.xml --id CAM_CONFIG_OPTS \
+--val="-nlev=207"
+
+# Setup the case:
+case.setup
+
+# Copy the required files for the Rayleigh friction:
+cp /glade/u/home/owhughes/make_cases/dcmip_gw/code/held_suarez_1994.F90 ./SourceMods/src.cam/held_suarez_1994.F90
+cp /glade/u/home/owhughes/make_cases/dcmip_gw/code/held_suarez_cam.F90 ./SourceMods/src.cam/held_suarez_cam.F90
+cp /glade/u/home/owhughes/make_cases/dcmip_gw/code/physics_types.F90 ./SourceMods/src.cam/physics_types.F90
