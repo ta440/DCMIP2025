@@ -1,0 +1,53 @@
+! Template user_nl_cam for test cases 2a and 2b and the SE dycore
+
+! Choose which case:
+!analytic_ic_type = 'gap_horiz_mount_flow'
+analytic_ic_type = 'vortex_horiz_mount_flow'
+
+write_nstep0 = .TRUE. ! Output the initial condition
+empty_htapes = .TRUE.
+avgflag_pertape = 'I'
+fincl1 = 'U', 'V', 'T', 'OMEGA', 'PS', 'PHIS', 'Z3'
+MFILT = 100
+
+! For 1 degree, ATM_NCPL = 960:
+NHTFRQ = 12 ! Output every 0.25 standard Earth days
+
+! For ATM_NCPL = 1920:
+NHTFRQ = 48 ! Output every 0.5 standard Earth days
+NHTFRQ = 24 ! Output every 0.25 standard Earth days
+
+! For ATM_NCPL = 3840:
+NHTFRQ = 96 ! Output every 0.5 standard Earth days
+NHTFRQ = 48 ! Output every 0.25 standard Earth days
+
+NDENS = 2
+interpolate_output = .true.
+
+! Remove T perturbations with the 
+! Held-Suarez compset
+pertlim = 0.0
+
+! Small Earth parameters
+rearth = 318561 ! Scale by 1/X, base value is 6371220 m
+scale_dry_air_mass = 0.0D0
+
+! Set the Earth's rotation rate. 
+! Set either omega=0 (no rotation) or sday (with rotation).
+omega = 0 ! No Coriolis
+!sday = 4308.2 ! With Coriolis. Defines omega=2*pi/sday. Scale by 1/X, with the base sday is 86164.1 s.
+
+! Scaled explicit diffusion for ne30:
+se_nu_top = 6.d3 ! Scale by T/X^2 = 1/X: base*5e-2 m^2/s. Default for ne60 is 1.2e5 m^2/s
+se_nu = 1.25d11 ! Scale by T/X^4 = 1/X^3: base*1.25e-4 m^4/s. Default for ne60 is 1.e15 m^4/s
+se_nu_p = 1.25d11 ! Scale by T/X^4 = 1/X^3: base*1.25e-4 m^4/s. Default for ne60 is 1.e15 m^4/s
+se_nu_div = 3.125d11 ! Scale by T/X^4 = 1/X^3: base*1.25e-4 m^4/s. Default for ne60 is 2.5e15 m^4/s
+
+! Scaled explicit diffusion for ne60:
+!se_nu_top = 6.d3 ! Scale by T/X^2 = 1/X: base*5e-2 m^2/s. Default for ne60 is 1.2e5 m^2/s
+!se_nu = 1.25d10 ! Scale by T/X^4 = 1/X^3: base*1.25e-4 m^4/s. Default for ne60 is 1.e14 m^4/s
+!se_nu_p = 1.25d10 ! Scale by T/X^4 = 1/X^3: base*1.25e-4 m^4/s. Default for ne60 is 1.e14 m^4/s
+!se_nu_div = 3.125d10 ! Scale by T/X^4 = 1/X^3: base*1.25e-4 m^4/s. Default for ne60 is 2.5e14 m^4/s
+
+! 30 km stretched grid. Change this is testing a different vertical resolution.
+NCDATA='/glade/u/home/timand/vertical_grids/cam_vcoords_horiz_mount_flow_stretch_dzlow300m_top30km_L38.nc'
