@@ -1,0 +1,19 @@
+! Template user_nl_cam for case 1 and the MPAS dycore
+
+analytic_ic_type = 'gw_break'
+
+write_nstep0 = .TRUE. ! Output the initial condition
+empty_htapes     = .TRUE.
+fincl1      = 'PS:I','PHIS:I','T:I','U:I','V:I','OMEGA:I','T850:I','U850:I','V850:I','OMEGA850:I','PSL:I','Z3:I'
+fincl2      = 'PSL:A', 'U:A', 'V:A', 'OMEGA:A', 'PHIS:I', 'Z3:I'
+MFILT            = 120, 120
+NHTFRQ           = -6, -6
+NDENS            = 2, 2
+
+mpas_rayleigh_damp_u = .false.
+mpas_cam_damping_levels = 0 
+mpas_zd                  = 40000
+
+pertlim = 0.0
+
+ncdata = "/glade/u/home/owhughes/MPAS_GRIDS/dcmip_vcoords_L207.nc"
