@@ -1,0 +1,58 @@
+! Template user_nl_cam for test cases 2a and 2b and the MPAS dycore
+
+! Choose the test case
+!analytic_ic_type = 'gap_horiz_mount_flow'
+analytic_ic_type = 'vortex_horiz_mount_flow'
+
+write_nstep0 = .TRUE. ! Output the initial condition
+empty_htapes = .TRUE.
+avgflag_pertape = 'I'
+fincl1 = 'U', 'V', 'T', 'OMEGA', 'PS', 'PHIS', 'Z3'
+MFILT = 90
+
+!!! For mpasa120, 1 degree, ATM_NCPL = 960:
+mpas_dt = 45.0 
+NHTFRQ = 12 ! Output every 0.25 standard Earth days
+
+!!! For mpasa60, 0.5 degree, ATM_NCPL = 1920:
+!mpas_dt = 22.5 
+!NHTFRQ = 24 ! Output every 0.25 standard Earth days
+
+!!! Remove T perturbations in the Held-Suarez compset
+pertlim = 0.0
+
+! Small Earth (X=20) radius
+rearth = 318561.0
+
+! Scale the Smagorinsky diffusion depending on resolution:
+mpas_len_disp = 6000.0D0 ! mpasa120
+!mpas_len_disp = 3000.0D0 ! mpasa60
+
+! Turn on the default RF:
+mpas_rayleigh_damp_u=.FALSE.
+
+! Vertical velocity damping
+!mpas_zd = 15000 ! Set this equal to the size of the RF layer
+mpas_zd = 40000 ! Disable the W damping
+
+! Select a NCDATA file and set either omega=0 or scaled sday.
+  
+! Gap, X20, no Coriolis:
+!NCDATA='/glade/u/home/timand/MPAS/cases/jw_baroclinic_wave/init_files/mpasa120_gap_X20_omega0_L38.init.nc' ! mpasa120
+!NCDATA='/glade/u/home/timand/MPAS/cases/jw_baroclinic_wave/init_files/mpasa60_gap_X20_omega0_L38.init.nc' ! mpasa60
+!omega=0
+
+! Gap, X20, with Coriolis:
+!NCDATA='/glade/u/home/timand/MPAS/cases/jw_baroclinic_wave/init_files/mpasa120_gap_X20_with_rot_L38.init.nc'  ! mpasa120
+!NCDATA='/glade/u/home/timand/MPAS/cases/jw_baroclinic_wave/init_files/mpasa60_gap_X20_with_rot_L38.init.nc'  ! mpasa60
+!sday = 4308.2
+
+! Vortex, X20, no Coriolis:
+NCDATA='/glade/u/home/timand/MPAS/cases/jw_baroclinic_wave/init_files/mpasa120_vortex_X20_omega0_L38.init.nc' ! mpasa120
+!NCDATA='/glade/u/home/timand/MPAS/cases/jw_baroclinic_wave/init_files/mpasa60_vortex_X20_omega0_L38.init.nc' ! mpasa60
+omega=0
+
+! Vortex, X20, with Coriolis:
+!NCDATA='/glade/u/home/timand/MPAS/cases/jw_baroclinic_wave/init_files/mpasa120_vortex_X20_with_rot_L38.init.nc' ! mpasa120
+!NCDATA='/glade/u/home/timand/MPAS/cases/jw_baroclinic_wave/init_files/mpasa60_vortex_X20_with_rot_L38.init.nc' ! mpasa60
+!sday = 4308.2
