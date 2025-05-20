@@ -14,7 +14,7 @@ MFILT = 100
 NDENS = 2
 
 ! For ATM_NCPL = 960 (1 degree resolution, C96) :
-NHTFRQ = 12 ! Output every 0.25 standard Earth days
+NHTFRQ = 24 ! Output every 0.25 standard Earth days
 
 ! For ATM_NCPL = 1920 (0.5 degree resolution, C192):
 NHTFRQ = 24 ! Output every 0.25 standard Earth days
