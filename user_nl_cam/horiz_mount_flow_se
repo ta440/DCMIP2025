@@ -10,16 +10,11 @@ avgflag_pertape = 'I'
 fincl1 = 'U', 'V', 'T', 'OMEGA', 'PS', 'PHIS', 'Z3'
 MFILT = 100
 
-! For 1 degree, ATM_NCPL = 960:
+! For ATM_NCPL = 960 (1 degree resolution, ne30) :
 NHTFRQ = 12 ! Output every 0.25 standard Earth days
 
-! For ATM_NCPL = 1920:
-NHTFRQ = 48 ! Output every 0.5 standard Earth days
+! For ATM_NCPL = 1920 (0.5 degree resolution, ne60):
 NHTFRQ = 24 ! Output every 0.25 standard Earth days
-
-! For ATM_NCPL = 3840:
-NHTFRQ = 96 ! Output every 0.5 standard Earth days
-NHTFRQ = 48 ! Output every 0.25 standard Earth days
 
 NDENS = 2
 interpolate_output = .true.
