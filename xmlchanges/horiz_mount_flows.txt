@@ -6,10 +6,10 @@
 REST_OPTION=none,\
 STOP_OPTION=nsteps
 
-# 1 degree resolutions: ne30, C96, mpasa120
+# 1 degree resolutions for SE, MPAS: ne30, mpasa120
 ./xmlchange ATM_NCPL=960
   
-# 0.5 degree resolutions: ne60, C192, mpasa60
+# 0.5 degree resolutions ne60, mpasa60, and both FV3 (C96, C192):
 ./xmlchange ATM_NCPL=1920
 
 # FV3 0.5 degree (C192) by default has an incorrect 
