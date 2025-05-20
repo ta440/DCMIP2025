@@ -13,13 +13,11 @@ fincl1 = 'U', 'V', 'T', 'OMEGA', 'PS', 'PHIS', 'Z3'
 MFILT = 100
 NDENS = 2
 
-! For ATM_NCPL = 1920:
-NHTFRQ = 48 ! Output every 0.5 standard Earth days
-NHTFRQ = 24 ! Output every 0.25 standard Earth days
+! For ATM_NCPL = 960 (1 degree resolution, ne30, C96, mpasa120) :
+NHTFRQ = 12 ! Output every 0.25 standard Earth days
 
-! For ATM_NCPL = 3840:
-NHTFRQ = 96 ! Output every 0.5 standard Earth days
-NHTFRQ = 48 ! Output every 0.25 standard Earth days
+! For ATM_NCPL = 1920 (0.5 degree resolution, ne60, C192, mpasa60):
+NHTFRQ = 24 ! Output every 0.25 standard Earth days
 
 ! Switch to sixth-order divergence damping, which
 ! is more stable than eighth-order
