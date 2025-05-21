@@ -3,6 +3,7 @@
 analytic_ic_type = 'squall'
 
 empty_htapes     = .TRUE.
+write_nstep0 = .TRUE. ! Output the initial condition
 avgflag_pertape  = 'I','I'
 MFILT            = 200,200
 NDENS            = 2,2
