@@ -35,13 +35,6 @@ STOP_OPTION=nsteps
 ./xmlchange --file env_build.xml --id CAM_CONFIG_OPTS --val \
 "--phys held_suarez --analytic_ic"
 
-# Change the number of nodes/processors  if needed;
-# only do so for 0.5 degree runs.
-# This is necessary for FV3, C192, as the CAM
-# default decomposition doesn't work.
-./xmlchange NTASKS=512 # se, mpas
-./xmlchange NTASKS=384 # FV3 needs 3/4 for its domain decomposition
-
 ./xmlchange JOB_WALLCLOCK_TIME=01:00:00
 
 # 30 km stretched grid
