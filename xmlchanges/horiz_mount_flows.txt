@@ -6,15 +6,20 @@
 REST_OPTION=none,\
 STOP_OPTION=nsteps
 
+# To use the workshop queue on casper:
+./xmlchange JOB_QUEUE='workshop'
+
 # 1 degree resolutions for SE, MPAS: ne30, mpasa120
 ./xmlchange ATM_NCPL=960
   
 # 0.5 degree resolutions ne60, mpasa60, and both FV3 (C96, C192):
 ./xmlchange ATM_NCPL=1920
 
-# FV3 0.5 degree (C192) by default has an incorrect 
-# domain decomposition, so need to change this
-./xmlchange NTASKS=384
+# Set NTASKS
+# SE
+./xmlchange NTASKS=124
+# FV3
+./xmlchange NTASKS=120
 
 # For the gap flow, equivalent of 10 standard Earth days
 ./xmlchange STOP_N=480 # 1 degree
