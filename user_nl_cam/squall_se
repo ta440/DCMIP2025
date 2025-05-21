@@ -1,0 +1,38 @@
+! Template user_nl_cam for squall line test case and SE dycore
+
+analytic_ic_type = 'moist_baroclinic_wave_dcmip2016'
+
+empty_htapes     = .TRUE.
+avgflag_pertape  = 'I','I'
+MFILT            = 200,200
+NDENS            = 2,2
+fincl1 = 'PS','Q','T','U','V','OMEGA','PRECT','CLDLIQ','RAINQM','Z3','rad_ref'
+fincl2 = 'PS','Q','T','U','V','OMEGA','PRECT','CLDLIQ','RAINQM','Z3','rad_ref'
+NHTFRQ = 2,2 ! outputs every minute
+scale_dry_air_mass =    0.0D0
+
+interpolate_output = .true., .false.
+interpolate_nlon = 360
+interpolate_nlat = 181
+
+omega = 0
+rearth = 1.06187e5 !X=60
+
+NCDATA = '/glade/work/nandrosk/fv3_equispaced_zt20km_L40_no_topo.init.nc' ! L40 grid in hybrid coordinates
+
+!
+! time steps
+!
+se_tstep = 5
+!se_dt_remap_factor             =    2   ! default 2
+!se_dt_tracer_factor            =    6   ! default 6
+
+!
+! tensor HV (default is 3.4e-8, units 1/s)
+!
+se_nu = 2.04e-6
+
+!
+! sponge layer
+!
+se_nu_top = 3.33E3
