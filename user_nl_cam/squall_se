@@ -1,6 +1,6 @@
 ! Template user_nl_cam for squall line test case and SE dycore at ne30 (1-deg)
 
-analytic_ic_type = 'moist_baroclinic_wave_dcmip2016'
+analytic_ic_type = 'squall'
 
 empty_htapes     = .TRUE.
 avgflag_pertape  = 'I','I'
