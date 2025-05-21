@@ -1,0 +1,37 @@
+! Template user_nl_cam for squall line test case and the MPAS dycore
+
+analytic_ic_type = 'moist_baroclinic_wave_dcmip2016' ! to use the modified squall line ics
+
+empty_htapes = .TRUE.
+write_nstep0 = .TRUE. ! Output the initial condition
+avgflag_pertape = 'I'
+MFILT = 200
+NDENS = 2
+fincl1 = 'PS','Q','T','U','V','OMEGA','PRECT','CLDLIQ','RAINQM','Z3','rad_ref'
+scale_dry_air_mass =    0.0D0 ! no automatic adjustments to dry air mass
+
+
+omega = 0
+rearth = 1.06187e5 ! X=60 scaled Earth radius
+
+mpas_len_disp = 2.0e3 ! 1.2e5/X
+
+
+!
+! mpasa120 (1-deg), ATM_NCPL = 2880 (30 seconds)
+!
+mpas_block_decomp_file_prefix = '/glade/campaign/cesm/cesmdata/cseg/inputdata/atm/cam/inic/mpas/mpasa120.graph.info.part.'
+NCDATA = '/glade/u/home/timand/mpas_grids/mpasa120_equispaced_zt20km_L40_no_topo_no_rot.init.nc'
+mpas_dt = 5 ! dynamics timestep
+NHTFRQ = 2 ! output every minute (i.e. every 2 physics time steps)
+
+
+!
+! mpasa60 (0.5-deg), ATM_NCPL = 5760 (15 seconds)
+!
+mpas_block_decomp_file_prefix = '/glade/campaign/cesm/cesmdata/cseg/inputdata/atm/cam/inic/mpas/mpasa60.graph.info.part.'
+NCDATA = '/glade/u/home/timand/mpas_grids/mpasa60_equispaced_zt20km_L40_no_topo_no_rot.init.nc'
+mpas_dt = 2.5 ! dynamics timestep
+NHTFRQ = 4 ! output every minute (i.e. every 4 physics time steps)
+
+
