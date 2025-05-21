@@ -1,6 +1,6 @@
 ! Template user_nl_cam for squall line test case and the MPAS dycore
 
-analytic_ic_type = 'moist_baroclinic_wave_dcmip2016' ! to use the modified squall line ics
+analytic_ic_type = 'squall' ! to use the modified squall line ics
 
 empty_htapes = .TRUE.
 write_nstep0 = .TRUE. ! Output the initial condition
