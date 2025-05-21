@@ -7,6 +7,15 @@ REST_OPTION=none
 
 ./xmlchange ATM_NCPL=96
 
+# To use the workshop queue on casper:
+./xmlchange JOB_QUEUE='workshop'
+
+# Set NTASKS
+# SE
+./xmlchange NTASKS=124
+# FV3
+./xmlchange NTASKS=120
+
 # Use the Held-Suarez compset to enable modified Rayleigh Friction
 ./xmlchange --file env_build.xml --id CAM_CONFIG_OPTS --val \
 "--phys held_suarez --analytic_ic"
