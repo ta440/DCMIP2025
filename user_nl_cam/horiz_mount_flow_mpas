@@ -38,14 +38,23 @@ mpas_zd = 40000 ! Disable the W damping
 ! Select a NCDATA file and set either omega=0 or scaled sday.
   
 ! Gap, X20, no Coriolis:
-!NCDATA='/glade/u/home/timand/MPAS/cases/jw_baroclinic_wave/init_files/mpasa120_gap_X20_omega0_L38.init.nc' ! mpasa120
+omega=0
+! mpasa120
+NCDATA='/glade/u/home/timand/MPAS/cases/jw_baroclinic_wave/init_files/mpasa120_gap_X20_omega0_L38.init.nc' 
+mpas_block_decomp_file_prefix = '/glade/campaign/cesm/cesmdata/cseg/inputdata/atm/cam/inic/mpas/mpasa120.graph.info.part.'
+! mpasa60
 !NCDATA='/glade/u/home/timand/MPAS/cases/jw_baroclinic_wave/init_files/mpasa60_gap_X20_omega0_L38.init.nc' ! mpasa60
-!omega=0
+!mpas_block_decomp_file_prefix = '/glade/campaign/cesm/cesmdata/cseg/inputdata/atm/cam/inic/mpas/mpasa60.graph.info.part.'
 
 ! Gap, X20, with Coriolis:
-!NCDATA='/glade/u/home/timand/MPAS/cases/jw_baroclinic_wave/init_files/mpasa120_gap_X20_with_rot_L38.init.nc'  ! mpasa120
-!NCDATA='/glade/u/home/timand/MPAS/cases/jw_baroclinic_wave/init_files/mpasa60_gap_X20_with_rot_L38.init.nc'  ! mpasa60
 !sday = 4308.2
+! mpasa120
+!NCDATA='/glade/u/home/timand/MPAS/cases/jw_baroclinic_wave/init_files/mpasa120_gap_X20_with_rot_L38.init.nc'
+!mpas_block_decomp_file_prefix = '/glade/campaign/cesm/cesmdata/cseg/inputdata/atm/cam/inic/mpas/mpasa120.graph.info.part.'
+! mpasa60
+!NCDATA='/glade/u/home/timand/MPAS/cases/jw_baroclinic_wave/init_files/mpasa60_gap_X20_with_rot_L38.init.nc' 
+!mpas_block_decomp_file_prefix = '/glade/campaign/cesm/cesmdata/cseg/inputdata/atm/cam/inic/mpas/mpasa60.graph.info.part.'
+
 
 ! Vortex, X20, no Coriolis:
 NCDATA='/glade/u/home/timand/MPAS/cases/jw_baroclinic_wave/init_files/mpasa120_vortex_X20_omega0_L38.init.nc' ! mpasa120
