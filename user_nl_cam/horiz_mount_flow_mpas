@@ -1,8 +1,8 @@
 ! Template user_nl_cam for test cases 2a and 2b and the MPAS dycore
 
 ! Choose the test case
-!analytic_ic_type = 'gap_horiz_mount_flow'
-analytic_ic_type = 'vortex_horiz_mount_flow'
+analytic_ic_type = 'gap_horiz_mount_flow'
+!analytic_ic_type = 'vortex_horiz_mount_flow'
 
 write_nstep0 = .TRUE. ! Output the initial condition
 empty_htapes = .TRUE.
