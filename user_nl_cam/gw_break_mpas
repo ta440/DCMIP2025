@@ -16,4 +16,4 @@ mpas_zd                  = 40000
 
 pertlim = 0.0
 
-ncdata = "/glade/u/home/owhughes/MPAS_GRIDS/dcmip_vcoords_L207.nc"
+ncdata = "/glade/derecho/scratch/owhughes/MPAS_GRIDS/dcmip_vcoords_L207.nc"
