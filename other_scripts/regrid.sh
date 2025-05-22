@@ -3,7 +3,7 @@
 export srcgrid=$1
 export dstgrid=$2
 
-export griddir=~/remapping/
+export griddir=/glade/u/home/timand/remapping
 export file=$3
 
 export srcinitfile=${file}.nc
