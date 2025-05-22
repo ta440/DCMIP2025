@@ -16,10 +16,7 @@ fincl1 = 'U', 'V', 'T', 'OMEGA', 'PS', 'PHIS', 'Z3'
 MFILT = 100
 NDENS = 2
 
-! For ATM_NCPL = 960 (1 degree resolution, C96) :
-NHTFRQ = 24 ! Output every 0.25 standard Earth days
-
-! For ATM_NCPL = 1920 (0.5 degree resolution, C192):
+! For ATM_NCPL = 1920:
 NHTFRQ = 24 ! Output every 0.25 standard Earth days
 
 ! Switch to sixth-order divergence damping, which
