@@ -4,6 +4,9 @@
 analytic_ic_type = 'gap_horiz_mount_flow'
 !analytic_ic_type = 'vortex_horiz_mount_flow'
 
+! For running with NTASKS=120 on casper
+fv3_pelayout = 4,5
+
 fv3_hydrostatic = .FALSE. ! set to FALSE for nonhydrostatic, TRUE for hydrostatic
   
 write_nstep0 = .TRUE. ! Output the initial condition
