@@ -1,8 +1,8 @@
 ! Template user_nl_cam for test cases 2a and 2b and the FV3 dycore
 
 ! Choose which case:
-!analytic_ic_type = 'gap_horiz_mount_flow'
-analytic_ic_type = 'vortex_horiz_mount_flow'
+analytic_ic_type = 'gap_horiz_mount_flow'
+!analytic_ic_type = 'vortex_horiz_mount_flow'
 
 fv3_hydrostatic = .FALSE. ! set to FALSE for nonhydrostatic, TRUE for hydrostatic
   
