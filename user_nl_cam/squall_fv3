@@ -1,1 +1,47 @@
+! Template user_nl_cam for squall line test case and the FV3 dycore
+
+analytic_ic_type = 'squall'
+
+empty_htapes     = .TRUE.
+write_nstep0 = .TRUE. ! Output the initial condition
+avgflag_pertape = 'I'
+MFILT = 200
+NDENS = 2
+fincl1 = 'PS','Q','T','U','V','OMEGA','PRECL','Z3','CLDLIQ','RAINQM','RAD_REF'
+scale_dry_air_mass =    0.0D0 ! no automatic adjustments to dry air mass
+
+
+omega = 0
+rearth = 1.06187e5 ! X=60 scaled Earth radius
+
+
+
+fv3_hydrostatic = .FALSE. ! set to FALSE for nonhydrostatic, TRUE for hydrostatic
+fv3_nord = 2 ! 6th order
+fv3_d2_bg_k1 = 0.15D0 ! sponge (not Rayleigh) layer coefficient
+fv3_d2_bg_k2 = 0.02D0 ! sponge (not Rayleigh) layer coefficient
+fv3_d4_bg    = 0.15D0 ! hyperviscosity ; limit < 0.182
+!
+! stable diffusion:
+!
+fv3_hord_mt = 10 !10 more diffusive, 5 non-hydrostatic defaults
+fv3_hord_vt = 10
+fv3_hord_tm = 10
+fv3_hord_dp = -10
+fv3_hord_tr = 8 ! traditional weather: -5 non-hydrostatic: 8 (monotonic)
+
+
+!
+! 1-degree specific variables
+!
+NHTFRQ = 4 ! output every minute (i.e. every 4 physics time steps)
+NCDATA = '/glade/work/nandrosk/fv3_equispaced_zt20km_L40_no_topo.init.nc' ! for L40 grid in hybrid coordinates
+!NCDATA = '/glade/campaign/cesm/cesmdata/inputdata/atm/cam/inic/fv3/cami-mam3_0000-01-01_C96_L30_c200625.nc'
+
+!
+! Rayleigh friction
+!
+fv3_tau = 0.083D0 ! 5 days (NH default) / 60
+fv3_rf_cutoff= 15000 ! Pa 15000 Pa is around ~13-15 km
+
 
