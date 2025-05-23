@@ -7,8 +7,8 @@ write_nstep0 = .TRUE. ! Output the initial condition
 avgflag_pertape  = 'I','I'
 MFILT            = 200,200
 NDENS            = 2,2
-fincl1 = 'PS','Q','T','U','V','OMEGA','PRECT','CLDLIQ','RAINQM','Z3','rad_ref'
-fincl2 = 'PS','Q','T','U','V','OMEGA','PRECT','CLDLIQ','RAINQM','Z3','rad_ref'
+fincl1 = 'T','U','V','OMEGA','Z3','PMID','PS','Q','CLDLIQ','RAINQM','TMQ','TMCLDLIQ','TMRAINQM','PRECT','RAD_REF'
+fincl2 = 'T','U','V','OMEGA','Z3','PMID','PS','Q','CLDLIQ','RAINQM','TMQ','TMCLDLIQ','TMRAINQM','PRECT','RAD_REF'
 scale_dry_air_mass =    0.0D0
 
 interpolate_output = .true., .false.
@@ -36,6 +36,7 @@ se_nu_top = 3.33E3
 se_tstep = 5
 !se_dt_remap_factor             =    2   ! default 2
 !se_dt_tracer_factor            =    6   ! default 6
-NHTFRQ = 2,2 ! outputs every minute
+!NHTFRQ = 2,2 ! outputs every minute
+NHTFRQ = 10,10 ! outputs every 5 minutes
 
 
