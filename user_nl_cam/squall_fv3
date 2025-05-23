@@ -7,8 +7,9 @@ write_nstep0 = .TRUE. ! Output the initial condition
 avgflag_pertape = 'I'
 MFILT = 200
 NDENS = 2
-fincl1 = 'PS','Q','T','U','V','OMEGA','PRECT','Z3','CLDLIQ','RAINQM','RAD_REF'
+fincl1 = 'T','U','V','OMEGA','Z3','PMID','PS','Q','CLDLIQ','RAINQM','TMQ','TMCLDLIQ','TMRAINQM','PRECT','RAD_REF'
 scale_dry_air_mass =    0.0D0 ! no automatic adjustments to dry air mass
+NCDATA = '/glade/work/nandrosk/fv3_equispaced_zt20km_L40_no_topo.init.nc' ! for L40 grid in hybrid coordinates
 
 
 omega = 0
@@ -34,14 +35,11 @@ fv3_hord_tr = 8 ! traditional weather: -5 non-hydrostatic: 8 (monotonic)
 !
 ! 1-degree specific variables
 !
-NHTFRQ = 4 ! output every minute (i.e. every 4 physics time steps)
-NCDATA = '/glade/work/nandrosk/fv3_equispaced_zt20km_L40_no_topo.init.nc' ! for L40 grid in hybrid coordinates
-!NCDATA = '/glade/campaign/cesm/cesmdata/inputdata/atm/cam/inic/fv3/cami-mam3_0000-01-01_C96_L30_c200625.nc'
+!NHTFRQ = 4 ! output every minute (i.e. every 4 physics time steps)
+NHTFRQ = 20 ! output every 5 minutes
 
 !
 ! Rayleigh friction
 !
 fv3_tau = 0.083D0 ! 5 days (NH default) / 60
 fv3_rf_cutoff= 15000 ! Pa 15000 Pa is around ~13-15 km
-
-
