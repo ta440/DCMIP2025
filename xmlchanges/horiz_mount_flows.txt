@@ -43,7 +43,7 @@ STOP_OPTION=nsteps
 # Use the Held-Suarez compset to enable modified Rayleigh Friction
 # and use the L38 30 km strectched grid.
 ./xmlchange --file env_build.xml --id CAM_CONFIG_OPTS --val \
-"--phys held_suarez --analytic_ic -nlev=38"
+"--phys held_suarez --analytic_ic --nlev=38"
 
 ./xmlchange JOB_WALLCLOCK_TIME=01:00:00
 
