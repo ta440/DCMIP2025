@@ -20,13 +20,9 @@ REST_OPTION=none
 
 # Use the Held-Suarez compset to enable modified Rayleigh Friction
 ./xmlchange --file env_build.xml --id CAM_CONFIG_OPTS --val \
-"--phys held_suarez --analytic_ic"
+"--phys held_suarez --analytic_ic --nlev=88"
 
 ./xmlchange JOB_WALLCLOCK_TIME=00:40:00
-
-# Modify for the number of levels you want
-./xmlchange --append --file env_build.xml --id CAM_CONFIG_OPTS \
---val="-nlev=207"
 
 # Setup the case:
 case.setup
