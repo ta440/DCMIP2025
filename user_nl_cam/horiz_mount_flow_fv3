@@ -8,7 +8,7 @@ analytic_ic_type = 'gap_horiz_mount_flow'
 fv3_layout = 4,5
 
 ! For running with NTASKS=240 on casper
-fv3_layout = 5,8
+!fv3_layout = 5,8
 
 fv3_hydrostatic = .FALSE. ! set to FALSE for nonhydrostatic, TRUE for hydrostatic
   
