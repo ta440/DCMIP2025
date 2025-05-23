@@ -12,11 +12,13 @@ MFILT = 90
 
 !!! For mpasa120, 1 degree, ATM_NCPL = 960:
 mpas_dt = 45.0 
-NHTFRQ = 12 ! Output every 0.25 standard Earth days
+NHTFRQ = 12 ! Output every 0.25 small Earth days
+!NHTFRQ = 24 ! Output every 0.5 small Earth days
 
 !!! For mpasa60, 0.5 degree, ATM_NCPL = 1920:
 !mpas_dt = 22.5 
-!NHTFRQ = 24 ! Output every 0.25 standard Earth days
+!NHTFRQ = 24 ! Output every 0.25 small Earth days
+!NHTFRQ = 48 ! Output every 0.5 small Earth days
 
 !!! Remove T perturbations in the Held-Suarez compset
 pertlim = 0.0
