@@ -7,14 +7,22 @@ write_nstep0 = .TRUE. ! Output the initial condition
 avgflag_pertape = 'I'
 MFILT = 200
 NDENS = 2
-fincl1 = 'PS','Q','T','U','V','OMEGA','PRECT','CLDLIQ','RAINQM','Z3','rad_ref'
+fincl1 = 'T','U','V','OMEGA','Z3','PMID','PS','Q','CLDLIQ','RAINQM','TMQ','TMCLDLIQ','TMRAINQM','PRECT','RAD_REF'
 scale_dry_air_mass =    0.0D0 ! no automatic adjustments to dry air mass
 
 
 omega = 0
 rearth = 1.06187e5 ! X=60 scaled Earth radius
-
 mpas_len_disp = 2.0e3 ! 1.2e5/X
+
+!
+! sponge layer parameters
+!
+mpas_zd = 15000 ! start altitude of w-damping layer in m (default 22000) 
+mpas_xnutr = 0.2 ! max w-damping coeff (default 0.2)
+mpas_rayleigh_damp_u = .true. ! if true, uses rayleigh damping on horizontal velocity
+mpas_rayleigh_damp_u_timescale_days = 0.083 ! scale by X (default 5 days --> 5/60 days)
+mpas_number_rayleigh_damp_u_levels = 5 ! number of sponge layers (default 3)
 
 
 !
@@ -23,8 +31,8 @@ mpas_len_disp = 2.0e3 ! 1.2e5/X
 mpas_block_decomp_file_prefix = '/glade/campaign/cesm/cesmdata/cseg/inputdata/atm/cam/inic/mpas/mpasa120.graph.info.part.'
 NCDATA = '/glade/u/home/timand/mpas_grids/mpasa120_equispaced_zt20km_L40_no_topo_no_rot.init.nc'
 mpas_dt = 5 ! dynamics timestep
-NHTFRQ = 2 ! output every minute (i.e. every 2 physics time steps)
-
+!NHTFRQ = 2 ! output every minute (i.e. every 2 physics time steps)
+NHTFRQ = 10 ! output every 5 minutes
 
 !
 ! mpasa60 (0.5-deg), ATM_NCPL = 5760 (15 seconds)
