@@ -49,6 +49,48 @@ def z_interp_uv(h, u_field, v_field, lon, lat, z_val):
                 field_vals[1, i, j] = weight_low*v_field[low_idx, i, j] + weight_high * v_field[high_idx, i, j]
     return field_vals
 
+def z_interp_w(nc, time, lon, lat, z_val):
+    h = nc['Z3'][time, :, lat, lon]
+    try:
+        q = nc['Q'][time, :, lat, lon]
+    except:
+        q = 0
+        qval = 0
+    T_field = nc['T'][time, :, lat, lon]
+    hyam = nc['hyam']
+    hybm = nc['hybm']
+    PS = nc['PS'][time, lat, lon]
+    omega_field = nc['OMEGA'][time, :, lat, lon]
+    field_vals = np.zeros((len(lat), len(lon)))
+    for i in np.arange(len(lat)):
+        for j in np.arange(len(lon)):
+            if h[-1, i, j] > z_val:
+                # This value is inside the topography
+                field_vals[i, j] = np.nan
+            else:
+                # Find indices either side of this value
+                low_idx = np.where(h[:, i, j] < z_val)[0][0]
+                high_idx = np.where(h[:, i, j] > z_val)[0][-1]
+
+                # Compute weightings
+                weight_low = (z_val - h[low_idx, i, j])/(h[high_idx, i, j] - h[low_idx, i, j])
+                weight_high = 1. - weight_low
+
+                # Compute and store value
+                if (q != 0):
+                    qval = weight_low * q[low_idx, i, j] + weight_high * q[high_idx, i, j]
+                T = weight_low * T_field[low_idx, i, j] + weight_high * T_field[high_idx, i, j]
+                p1 = hyam[low_idx]*1e5 + hybm[low_idx]*PS[i, j]
+                p2 = hyam[high_idx]*1e5 + hybm[high_idx]*PS[i, j]
+                P = weight_low * p1 + weight_high * p2
+                Tv = T * (1.0 + 0.608 * qval)
+                rho = P / (287.0 * Tv)
+                omega = weight_low * omega_field[low_idx, i, j] + weight_high * omega_field[high_idx, i, j]
+                field_vals[i, j] = -omega/(rho * 9.81)
+                # field_vals[0, i, j] = weight_low*u_field[low_idx, i, j] + weight_high * u_field[high_idx, i, j]
+                # field_vals[1, i, j] = weight_low*v_field[low_idx, i, j] + weight_high * v_field[high_idx, i, j]
+    return field_vals
+
 
 class MidpointNormalize(colors.Normalize):  # a class for the colorbar normalization
     def __init__(self, vmin=None, vmax=None, midpoint=None, clip=False):
