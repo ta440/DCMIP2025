@@ -31,6 +31,12 @@ se_nu = 2.04e-6
 se_nu_top = 3.33E3
 
 !
+! update settings
+!
+se_ftype = 2 ! value of 0 can lead to GW ringing
+se_statefreq = 30 ! frequency of diagnostic output to log file
+
+!
 ! time steps (resolution-dependent)
 !
 se_tstep = 5
