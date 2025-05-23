@@ -7,7 +7,7 @@ write_nstep0 = .TRUE. ! Output the initial condition
 avgflag_pertape = 'I'
 MFILT = 200
 NDENS = 2
-fincl1 = 'PS','Q','T','U','V','OMEGA','PRECL','Z3','CLDLIQ','RAINQM','RAD_REF'
+fincl1 = 'PS','Q','T','U','V','OMEGA','PRECT','Z3','CLDLIQ','RAINQM','RAD_REF'
 scale_dry_air_mass =    0.0D0 ! no automatic adjustments to dry air mass
 
 
