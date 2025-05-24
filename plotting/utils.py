@@ -9,8 +9,8 @@ def z_interp(h, field_vals_all, lon, lat, z_val):
         for j in np.arange(len(lon)):
             if h[-1, i, j] > z_val:
                 # This value is inside the topography
-                # field_vals[i, j] = np.nan
-                field_vals[i, j] = field_vals_all[-1,i,j]
+                field_vals[i, j] = np.nan
+                # field_vals[i, j] = field_vals_all[-1,i,j]
             else:
                 # Find indices either side of this value
                 low_idx = np.where(h[:, i, j] < z_val)[0][0]
@@ -31,10 +31,10 @@ def z_interp_uv(h, u_field, v_field, lon, lat, z_val):
         for j in np.arange(len(lon)):
             if h[-1, i, j] > z_val:
                 # This value is inside the topography
-                # field_vals[0, i, j] = np.nan
-                # field_vals[1, i, j] = np.nan
-                field_vals[0, i, j] = u_field[-1, i, j]
-                field_vals[1, i, j] = v_field[-1, i, j]
+                field_vals[0, i, j] = np.nan
+                field_vals[1, i, j] = np.nan
+                # field_vals[0, i, j] = u_field[-1, i, j]
+                # field_vals[1, i, j] = v_field[-1, i, j]
             else:
                 # Find indices either side of this value
                 low_idx = np.where(h[:, i, j] < z_val)[0][0]
@@ -49,7 +49,7 @@ def z_interp_uv(h, u_field, v_field, lon, lat, z_val):
                 field_vals[1, i, j] = weight_low*v_field[low_idx, i, j] + weight_high * v_field[high_idx, i, j]
     return field_vals
 
-def z_interp_w(nc, time, lon, lat, z_val):
+def z_interp_w_hydrostatic(nc, time, lon, lat, z_val):
     h = nc['Z3'][time, :, lat, lon]
     try:
         q = nc['Q'][time, :, lat, lon]
