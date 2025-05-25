@@ -16,4 +16,5 @@ mpas_zd                  = 40000
 
 pertlim = 0.0
 
-ncdata = "/glade/derecho/scratch/owhughes/MPAS_GRIDS/dcmip_vcoords_L207.nc"
+! Choose L88, L120, or L207
+ncdata = "/glade/derecho/scratch/owhughes/MPAS_GRIDS/dcmip_vcoords_L88.nc"
