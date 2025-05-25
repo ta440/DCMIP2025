@@ -12,5 +12,6 @@ NDENS            = 2, 2
 interpolate_output = .true.
 pertlim = 0.0
 
-ncdata = "/glade/u/home/owhughes/vertical_grids/dcmip_vcoords_L207.nc"
+! Choose L88, L120, or L207
+ncdata = "/glade/u/home/owhughes/vertical_grids/dcmip_vcoords_L88.nc"
   
