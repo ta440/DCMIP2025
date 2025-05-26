@@ -7,7 +7,7 @@ analytic_ic_type = 'gap_horiz_mount_flow'
 write_nstep0 = .TRUE. ! Output the initial condition
 empty_htapes = .TRUE.
 avgflag_pertape = 'I'
-fincl1 = 'U', 'V', 'T', 'OMEGA', 'PS', 'PHIS', 'Z3'
+fincl1 = 'U', 'V', 'T', 'OMEGA', 'PS', 'PHIS', 'Z3', 'w', 'theta', 'rho'
 MFILT = 90
 
 !!! For mpasa120, 1 degree, ATM_NCPL = 960:
