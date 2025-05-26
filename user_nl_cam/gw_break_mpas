@@ -4,7 +4,7 @@ analytic_ic_type = 'gw_break'
 
 write_nstep0 = .TRUE. ! Output the initial condition
 empty_htapes     = .TRUE.
-fincl1      = 'PS:I','PHIS:I','T:I','U:I','V:I','OMEGA:I','T850:I','U850:I','V850:I','OMEGA850:I','PSL:I','Z3:I'
+fincl1      = 'PS:I','PHIS:I','T:I','U:I','V:I','OMEGA:I','T850:I','U850:I','V850:I','OMEGA850:I','PSL:I','Z3:I', 'w:I', 'theta:I', 'rho:I'
 fincl2      = 'PSL:A', 'U:A', 'V:A', 'OMEGA:A', 'PHIS:I', 'Z3:I'
 MFILT            = 120, 120
 NHTFRQ           = -6, -6
