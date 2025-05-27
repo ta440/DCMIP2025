@@ -27,6 +27,11 @@ NHTFRQ = 24 ! Output every 0.25 small Earth days
 ! is more stable than eighth-order
 fv3_nord = 2
 
+! For C192, need to increase the number of vertical remaps
+! for stability. This reduces the acoustic timestep size
+! by a factor of 2.
+fv3_k_split = 4
+
 ! Add vorticity damping for stability. 
 fv3_do_vort_damp = .TRUE.
 fv3_vtdm4 = 0.05
