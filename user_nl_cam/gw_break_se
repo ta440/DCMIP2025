@@ -9,7 +9,13 @@ fincl2      = 'PSL:A', 'U:A', 'V:A', 'OMEGA:A', 'PHIS:I', 'Z3:I'
 MFILT            = 120, 120
 NHTFRQ           = -6, -6
 NDENS            = 2, 2
+
 interpolate_output = .true.
+
+! Interpolate to 1 degree.
+interpolate_nlon = 360
+interpolate_nlat = 181
+
 pertlim = 0.0
 
 ! Choose L88, L120, or L207
