@@ -21,6 +21,10 @@ NHTFRQ = 12 ! Output every 0.25 small Earth days
 NDENS = 2
 interpolate_output = .true.
 
+! Interpolate to 1 degree.
+interpolate_nlon = 360
+interpolate_nlat = 181
+
 ! Remove T perturbations with the 
 ! Held-Suarez compset
 pertlim = 0.0
