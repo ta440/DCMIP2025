@@ -25,6 +25,10 @@ interpolate_output = .true.
 interpolate_nlon = 360
 interpolate_nlat = 181
 
+! Interpolate to 0.5 degree:
+interpolate_nlon = 720
+interpolate_nlat = 361
+
 ! Remove T perturbations with the 
 ! Held-Suarez compset
 pertlim = 0.0
