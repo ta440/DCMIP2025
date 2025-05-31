@@ -1,48 +1,68 @@
-! Template user_nl_cam for squall line test case and SE dycore at ne30 (1-deg)
+! Template user_nl_cam for squall line test case and SE dycore at for 1-deg (ne30) and 0.5-deg (ne60)
 
-analytic_ic_type = 'squall'
+analytic_ic_type = 'squall' ! to use the modified squall line ics
 
-empty_htapes     = .TRUE.
-write_nstep0 = .TRUE. ! Output the initial condition
-avgflag_pertape  = 'I','I'
-MFILT            = 200,200
-NDENS            = 2,2
+empty_htapes = .TRUE.               ! clear default history files
+write_nstep0 = .TRUE.               ! Output the initial condition
+avgflag_pertape = 'I','A','I','A'   ! I = instantaneous output, A = average output
+MFILT = 200,200,200,200             ! max number of samples in history files
+NDENS = 2,2,2,2                     ! precision of output
 fincl1 = 'T','U','V','OMEGA','Z3','PMID','PS','Q','CLDLIQ','RAINQM','TMQ','TMCLDLIQ','TMRAINQM','PRECT','RAD_REF'
-fincl2 = 'T','U','V','OMEGA','Z3','PMID','PS','Q','CLDLIQ','RAINQM','TMQ','TMCLDLIQ','TMRAINQM','PRECT','RAD_REF'
-scale_dry_air_mass =    0.0D0
+fincl2 = 'PRECT'
+fincl3 = 'T','U','V','OMEGA','Z3','PMID','PS','Q','CLDLIQ','RAINQM','TMQ','TMCLDLIQ','TMRAINQM','PRECT','RAD_REF'
+fincl4 = 'PRECT' 
+scale_dry_air_mass =    0.0D0 ! no automatic adjustments to dry air mass
 
-interpolate_output = .true., .false.
-interpolate_nlon = 360
-interpolate_nlat = 181
 
-omega = 0
-rearth = 1.06187e5 !X=60
+omega = 0             ! no rotation
+rearth = 1.06187e5    ! X=60 scaled Earth radius
+
+! the first two output files (h0 and h1) will be interpolated to lat-lon
+! the last two output files  (h2 and h3) will be on the native cubed-sphere grid
+interpolate_output = .true., .true., .false., .false.
+
 
 NCDATA = '/glade/work/nandrosk/fv3_equispaced_zt20km_L40_no_topo.init.nc' ! L40 grid in hybrid coordinates
 
 !
-! tensor HV (default is 3.4e-8, units 1/s)
+! tensor HV (default is 3.4e-8 for ne30 and ne60, units 1/s, scales by T)
 !
-se_nu = 2.04e-6
+se_nu = 2.04e-6 ! scale by T = 1/X from 3.4e-8 1-deg default
 
 !
-! sponge layer
+! sponge layer (default 2e5 for ne30 and ne60, units m^2/s, scale by T/X^2)
 !
-se_nu_top = 3.33E3
+se_nu_top = 3.33E3 ! scales by 1/X
 
 !
-! update settings
+! update physics coupling to proper default
 !
-se_ftype = 2 ! value of 0 can lead to GW ringing
-se_statefreq = 30 ! frequency of diagnostic output to log file
+se_ftype = 2       ! value of 0 can lead to GW ringing
 
 !
-! time steps (resolution-dependent)
+! 1-deg (ne30) with ATM_NCPL = 2880 (t_phys = 30 s)
 !
+interpolate_nlon = 360 ! 1-deg lat lon grid that includes the equator
+interpolate_nlat = 181
 se_tstep = 5
 !se_dt_remap_factor             =    2   ! default 2
 !se_dt_tracer_factor            =    6   ! default 6
-!NHTFRQ = 2,2 ! outputs every minute
-NHTFRQ = 10,10 ! outputs every 5 minutes
+!NHTFRQ = 2,2,2,2 ! outputs every minute
+NHTFRQ = 10,10,10,10 ! outputs every 5 minutes
+se_statefreq = 300 ! frequency of diagnostic output to log file in terms of dynamic time steps
+
+
+!
+! 0.5-deg (ne60) with ATM_NCPL = 5760 (t_phys = 15 s)
+!
+interpolate_nlon = 720 ! 1-deg lat lon grid that includes the equator
+interpolate_nlat = 361
+se_tstep = 2.5
+!se_dt_remap_factor             =    2   ! default 2
+!se_dt_tracer_factor            =    6   ! default 6
+!NHTFRQ = 4,4,4,4 ! outputs every minute (every 4 physics time steps)
+NHTFRQ = 20,20,20,20 ! outputs every 5 minutes
+se_statefreq = 600 ! frequency of diagnostic output to log file in terms of dynamic time steps
+
 
 
