@@ -2,44 +2,54 @@
 
 analytic_ic_type = 'squall' ! to use the modified squall line ics
 
-empty_htapes = .TRUE.
-write_nstep0 = .TRUE. ! Output the initial condition
-avgflag_pertape = 'I'
-MFILT = 200
-NDENS = 2
-fincl1 = 'T','U','V','OMEGA','Z3','PMID','PS','Q','CLDLIQ','RAINQM','TMQ','TMCLDLIQ','TMRAINQM','PRECT','RAD_REF'
+empty_htapes = .TRUE.         ! clear default history files
+write_nstep0 = .TRUE.         ! Output the initial condition
+avgflag_pertape = 'I','A'     ! I = instantaneous output, A = average output
+MFILT = 200,200               ! max number of samples in history files
+NDENS = 2,2                   ! precision of output
+fincl1 = 'T','U','V','OMEGA','Z3','PMID','PS','Q','CLDLIQ','RAINQM','TMQ','TMCLDLIQ','TMRAINQM','PRECT','RAD_REF','w','theta','rho'
+fincl2 = 'PRECT'
 scale_dry_air_mass =    0.0D0 ! no automatic adjustments to dry air mass
 
 
-omega = 0
-rearth = 1.06187e5 ! X=60 scaled Earth radius
-mpas_len_disp = 2.0e3 ! 1.2e5/X
+omega = 0             ! no rotation
+rearth = 1.06187e5    ! X=60 scaled Earth radius
 
 !
 ! sponge layer parameters
 !
-mpas_zd = 15000 ! start altitude of w-damping layer in m (default 22000) 
-mpas_xnutr = 0.2 ! max w-damping coeff (default 0.2)
-mpas_rayleigh_damp_u = .true. ! if true, uses rayleigh damping on horizontal velocity
+mpas_zd = 15000                             ! start altitude of w-damping layer in m (default 22000)
+mpas_xnutr = 0.2                            ! max w-damping coeff (default 0.2)
+mpas_rayleigh_damp_u = .true.               ! if true, uses rayleigh damping on horizontal velocity
 mpas_rayleigh_damp_u_timescale_days = 0.083 ! scale by X (default 5 days --> 5/60 days)
-mpas_number_rayleigh_damp_u_levels = 5 ! number of sponge layers (default 3)
+mpas_number_rayleigh_damp_u_levels = 5      ! number of sponge layers (default 3)
 
 
 !
 ! mpasa120 (1-deg), ATM_NCPL = 2880 (30 seconds)
 !
-mpas_block_decomp_file_prefix = '/glade/campaign/cesm/cesmdata/cseg/inputdata/atm/cam/inic/mpas/mpasa120.graph.info.part.'
-NCDATA = '/glade/u/home/timand/mpas_grids/mpasa120_equispaced_zt20km_L40_no_topo_no_rot.init.nc'
-mpas_dt = 5 ! dynamics timestep
-!NHTFRQ = 2 ! output every minute (i.e. every 2 physics time steps)
-NHTFRQ = 10 ! output every 5 minutes
+mpas_block_decomp_file_prefix = '/glade/campaign/cesm/cesmdata/cseg/inputdata/atm/cam/inic/mpas/mpasa120.graph.info.part.'  ! for allocating computational resources
+NCDATA = '/glade/u/home/timand/mpas_grids/mpasa120_equispaced_zt20km_L40_no_topo_no_rot.init.nc'    ! L40 vertical grid
+mpas_len_disp = 2.0e3 ! Scaled for small Earth: 1.2e5/X
+mpas_dt = 5    ! dynamics timestep
+!NHTFRQ = 2,2  ! output every minute (i.e. every 2 physics time steps)
+NHTFRQ = 10,10 ! output every 5 minutes
+
 
 !
 ! mpasa60 (0.5-deg), ATM_NCPL = 5760 (15 seconds)
 !
 mpas_block_decomp_file_prefix = '/glade/campaign/cesm/cesmdata/cseg/inputdata/atm/cam/inic/mpas/mpasa60.graph.info.part.'
 NCDATA = '/glade/u/home/timand/mpas_grids/mpasa60_equispaced_zt20km_L40_no_topo_no_rot.init.nc'
+mpas_len_disp = 1.0e3 ! Scaled for small Earth: 0.6e5/X
 mpas_dt = 2.5 ! dynamics timestep
-NHTFRQ = 4 ! output every minute (i.e. every 4 physics time steps)
+!NHTFRQ = 4,4  ! output every minute (i.e. every 2 physics time steps)
+NHTFRQ = 20,20 ! output every 5 minutes
 
+!
+! mpasa diagnostic output variables
+!
+mpas_print_detailed_minmax_vel         =  .false. ! default .true.
+mpas_print_global_minmax_sca           =  .false. ! default .false.
+mpas_print_global_minmax_vel           =  .false. ! default .true.
 
