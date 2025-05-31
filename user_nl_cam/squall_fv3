@@ -1,45 +1,81 @@
 ! Template user_nl_cam for squall line test case and the FV3 dycore
 
-analytic_ic_type = 'squall'
+analytic_ic_type = 'squall' ! to use the modified squall line ics
 
-empty_htapes     = .TRUE.
-write_nstep0 = .TRUE. ! Output the initial condition
-avgflag_pertape = 'I'
-MFILT = 200
-NDENS = 2
+empty_htapes = .TRUE.      ! clear default history files
+write_nstep0 = .TRUE.      ! Output the initial condition
+avgflag_pertape = 'I','A'  ! I = instantaneous output, A = average output
+MFILT = 200,200            ! max number of samples in history files
+NDENS = 2,2                ! precision of output
 fincl1 = 'T','U','V','OMEGA','Z3','PMID','PS','Q','CLDLIQ','RAINQM','TMQ','TMCLDLIQ','TMRAINQM','PRECT','RAD_REF'
+fincl2 = 'PRECT'
 scale_dry_air_mass =    0.0D0 ! no automatic adjustments to dry air mass
-NCDATA = '/glade/work/nandrosk/fv3_equispaced_zt20km_L40_no_topo.init.nc' ! for L40 grid in hybrid coordinates
 
 
-omega = 0
+omega = 0          ! no rotation
 rearth = 1.06187e5 ! X=60 scaled Earth radius
 
-fv3_layout = 4,5 ! required in order to use NTASKS=120
+NCDATA = '/glade/work/nandrosk/fv3_equispaced_zt20km_L40_no_topo.init.nc' ! for L40 grid in hybrid coordinates
 
 fv3_hydrostatic = .FALSE. ! set to FALSE for nonhydrostatic, TRUE for hydrostatic
-fv3_nord = 2 ! 6th order
-fv3_d2_bg_k1 = 0.15D0 ! sponge (not Rayleigh) layer coefficient
-fv3_d2_bg_k2 = 0.02D0 ! sponge (not Rayleigh) layer coefficient
-fv3_d4_bg    = 0.15D0 ! hyperviscosity ; limit < 0.182
+
 !
-! stable diffusion:
+! Rayleigh friction sponge
 !
+fv3_tau = 0.083D0 ! 5 days (NH default) / 60
+fv3_rf_cutoff= 15000 ! Pa 15000 Pa is around ~13-15 km
+
+!
+! 1-degree (C96) with ATM_NCPL = 5760 (t_phys = 15 s)
+!
+fv3_layout = 4,5 ! required in order to use NTASKS=120
+!NHTFRQ = 4,4 ! output every minute (i.e. every 4 physics time steps)
+NHTFRQ = 20,20 ! output every 5 minutes
+
+
+
+! 1-deg stable diffusion/transport scheme:
 fv3_hord_mt = 10 !10 more diffusive, 5 non-hydrostatic defaults
 fv3_hord_vt = 10
 fv3_hord_tm = 10
 fv3_hord_dp = -10
 fv3_hord_tr = 8 ! traditional weather: -5 non-hydrostatic: 8 (monotonic)
 
+fv3_nord = 2 ! 6th order hyperviscosity diffusion
+fv3_d2_bg_k1 = 0.0D0  ! Laplacian sponge coefficient (lower layer). Default 0.15D0
+fv3_d2_bg_k2 = 0.0D0  ! Laplacian sponge coefficient (upper layer). Default 0.02D0
+fv3_d4_bg    = 0.15D0 ! hyperviscosity coeff; diffusive instability limit < 0.182 for 6th order, < 0.172 for 8th order
+
+
 
 !
-! 1-degree specific variables
+! 0.5-degree (C192) with ATM_NCPL = 5760 (t_phys = 15 s)
 !
-!NHTFRQ = 4 ! output every minute (i.e. every 4 physics time steps)
-NHTFRQ = 20 ! output every 5 minutes
+fv3_layout = 5,8 ! 0.5-deg NTASKS=240
+!NHTFRQ = 4,4 ! output every minute (i.e. every 4 physics time steps)
+NHTFRQ = 20,20 ! output every 5 minutes
 
-!
-! Rayleigh friction
-!
-fv3_tau = 0.083D0 ! 5 days (NH default) / 60
-fv3_rf_cutoff= 15000 ! Pa 15000 Pa is around ~13-15 km
+! 0.5-deg stable diffusion/transport scheme:
+fv3_hord_mt = 10 !10 more diffusive, 5 non-hydrostatic defaults
+fv3_hord_vt = 10
+fv3_hord_tm = 10
+fv3_hord_dp = -10
+fv3_hord_tr = 8 ! fastest monotonic scheme, -5 least inviscid unlimited scheme with positivity constraint (FV3's non-hydrostatic default)
+
+fv3_nord = 1 ! 4th order
+fv3_d2_bg_k1 = 0.0D0  ! Laplacian sponge coefficient (lower layer). Default 0.15D0
+fv3_d2_bg_k2 = 0.0D0  ! Laplacian sponge coefficient (upper layer). Default 0.02D0
+fv3_d4_bg    = 0.15D0 ! hyperviscosity coeff; diffusive instability limit < 0.182 for 6th order, < 0.172 for 8th order
+
+
+! For C192, need to increase the number of vertical remaps
+! for stability. This reduces the acoustic timestep size
+! by a factor of 2.
+fv3_k_split = 4 ! default 2
+
+!fv3_dddmp    = 0.2    ! Dimensionless coefficient for the second-order Smagorinsky-like divergence damping
+
+
+
+
+
