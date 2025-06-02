@@ -1,0 +1,53 @@
+# To record the xmlchanges for the horizontal mountain flow
+# cases for DCMIP 2025.
+# These use a small earth factor of X=20.
+
+./xmlchange DOUT_S=FALSE,\
+REST_OPTION=none,\
+STOP_OPTION=nsteps
+
+# To use the workshop queue on casper:
+./xmlchange JOB_QUEUE='workshop'
+
+# 1 degree resolutions for SE, MPAS: ne30, mpasa120
+./xmlchange ATM_NCPL=2880
+  
+# 0.5 degree resolutions ne60, mpasa60, and both FV3 (C96, C192):
+./xmlchange ATM_NCPL=5760
+
+# For SE, we need to select the non-hydrostatic dycore (theta-l) using CAM_TARGET
+./xmlchange CAM_TARGET=theta-l
+
+# Set NTASKS
+# 1 degree configurations:
+# SE
+./xmlchange NTASKS=124
+# FV3
+./xmlchange NTASKS=120
+# MPAS
+./xmlchange NTASKS=96
+
+# 0.5 degree configurations:
+# SE
+./xmlchange NTASKS=248
+# FV3
+./xmlchange NTASKS=240
+# MPAS
+./xmlchange NTASKS=216
+
+# For ATM_NCPL=2880 (30 s physics time step)
+./xmlchange STOP_N=360 # 1 degree
+
+# For ATM_NCPL=5760 (15 s physics time step)
+./xmlchange STOP_N=720
+
+# Use the Kessler compset
+# and use the L40 20 km, uniform spaced grid.
+./xmlchange --id CAM_CONFIG_OPTS --val \
+"--phys kessler --analytic_ic --nlev=40"
+
+./xmlchange JOB_WALLCLOCK_TIME=01:00:00
+
+
+# Set up the case:
+case.setup
