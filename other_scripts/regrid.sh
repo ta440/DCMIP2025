@@ -9,5 +9,5 @@ export file=$3
 export srcinitfile=${file}.nc
 export dstinitfile=${file}.regrid.${dstgrid}.nc
 
-ncremap -m ${griddir}map_${srcgrid}_to_${dstgrid}_aave.nc -i\
+ncremap -m ${griddir}/map_${srcgrid}_to_${dstgrid}_aave.nc -i\
  ${srcinitfile} -o ${dstinitfile}
