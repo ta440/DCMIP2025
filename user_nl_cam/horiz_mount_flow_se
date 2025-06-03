@@ -42,14 +42,16 @@ scale_dry_air_mass = 0.0D0
 omega = 0 ! No Coriolis
 !sday = 4308.2 ! With Coriolis. Defines omega=2*pi/sday. Scale by 1/X, with the base sday is 86164.1 s.
 
+! Remove (or make negligibly small) the Laplacian
+! sponge layer at the model top
+se_nu_top = 1e-8
+
 ! Scaled explicit diffusion for ne30:
-se_nu_top = 6.d3 ! Scale by T/X^2 = 1/X: base*5e-2 m^2/s. Default for ne30 is 1.2e5 m^2/s
 se_nu = 1.25d11 ! Scale by T/X^4 = 1/X^3: base*1.25e-4 m^4/s. Default for ne30 is 1.e15 m^4/s
 se_nu_p = 1.25d11 ! Scale by T/X^4 = 1/X^3: base*1.25e-4 m^4/s. Default for ne30 is 1.e15 m^4/s
 se_nu_div = 3.125d11 ! Scale by T/X^4 = 1/X^3: base*1.25e-4 m^4/s. Default for ne30 is 2.5e15 m^4/s
 
 ! Scaled explicit diffusion for ne60:
-!se_nu_top = 6.d3 ! Scale by T/X^2 = 1/X: base*5e-2 m^2/s. Default for ne60 is 1.2e5 m^2/s
 !se_nu = 1.25d10 ! Scale by T/X^4 = 1/X^3: base*1.25e-4 m^4/s. Default for ne60 is 1.e14 m^4/s
 !se_nu_p = 1.25d10 ! Scale by T/X^4 = 1/X^3: base*1.25e-4 m^4/s. Default for ne60 is 1.e14 m^4/s
 !se_nu_div = 3.125d10 ! Scale by T/X^4 = 1/X^3: base*1.25e-4 m^4/s. Default for ne60 is 2.5e14 m^4/s
