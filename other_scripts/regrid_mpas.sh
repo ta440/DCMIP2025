@@ -1,14 +1,22 @@
-for i in 88 120 207
-do
-echo "Extracting w, rho, theta for L$i"
-ncks -v w,rho,theta CAM_6_4_060_06032025.mpasa120_mpasa120.FHS94.mountain_gw.mpasa120_L$i.cam.h0i.0001-01-01-21600.native.nc nCells.nc
+#!/bin/bash
+
+export srcgrid=$1
+export dstgrid=$2
+
+export griddir=/glade/u/home/timand/remapping
+export file=$3
+
+export srcinitfile=${file}.nc
+export dstinitfile=${file}.regrid.${dstgrid}.nc
+
+echo "Extracting w, rho, theta"
+ncks -v w,rho,theta ${srcinitfile} nCells.nc
 echo "Renaming mislabeled dimensions"
-ncrename -O -d nCells,ncol nCells.nc
+ncrename -d nCells,ncol nCells.nc
 echo "Extracing correctly dimensioned variables"
-ncks -x -v w,rho,theta CAM_6_4_060_06032025.mpasa120_mpasa120.FHS94.mountain_gw.mpasa120_L$i.cam.h0i.0001-01-01-21600.native.nc ncol.nc
+ncks -x -v w,rho,theta ${srcinitfile} ncol.nc
 echo "Concatenating into output file."
 ncks -A nCells.nc ncol.nc
-ncremap -m ~/regrid/map_mpasa120_to_1x1_aave.nc ncol.nc CAM_6_4_060_06032025.mpasa120_mpasa120.FHS94.mountain_gw.mpasa120_L$i.cam.h0i.0001-01-01-21600.nc
-rm -v nCells.nc ncol.nc
 
-done
+ncremap -m ${griddir}/map_${srcgrid}_to_${dstgrid}_aave.nc -i\
+ ncol.nc -o ${dstinitfile}
