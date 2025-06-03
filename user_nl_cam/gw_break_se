@@ -18,6 +18,10 @@ interpolate_nlat = 181
 
 pertlim = 0.0
 
+! Remove the Laplacian sponge layer (make it negligly small), 
+! as we use an RF layer instead
+se_nu_top = 1e-10
+
 ! Choose L88, L120, or L207
 ncdata = "/glade/u/home/owhughes/vertical_grids/dcmip_vcoords_L88.nc"
   
