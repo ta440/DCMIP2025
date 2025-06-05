@@ -56,10 +56,10 @@ module ic_squall
        pert_dtheta = 3.d0         ,   & ! perturbation magnitude
        pert_lonc   = 120.d0 * deg2rad,& ! perturbation longitude
        pert_latc   = 0.d0         ,   & ! perturbation latitude
-       pert_rh     = 5000.d0     ,    & ! perturbation horiz. halfwidth in m
+       pert_rh     = 3000.d0     ,    & ! perturbation horiz. halfwidth in m
        pert_zc     = 1500.d0      ,   & ! perturbation center altitude
        pert_rz     = 1500.d0      ,   & ! perturbation vert. halfwidth
-       pert_spacing = 10000.d0          ! spacing between perturbations in m
+       pert_spacing = 6000.d0          ! spacing between perturbations in m
   integer,  parameter :: pert = 1       ! 0: no bubble, 1: bubble included
   
   
