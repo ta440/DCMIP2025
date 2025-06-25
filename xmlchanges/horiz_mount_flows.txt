@@ -37,8 +37,8 @@ STOP_OPTION=nsteps
 ./xmlchange STOP_N=960 # 0.5 degree
 
 # For the vortex street, the equivalent of 20 standard Earth days
-./xmlchange STOP_N=1920 # 1 degree
-./xmlchange STOP_N=3840 # 0.5 degree
+./xmlchange STOP_N=960 # 1 degree
+./xmlchange STOP_N=1920 # 0.5 degree
 
 # Use the Held-Suarez compset to enable modified Rayleigh Friction
 # and use the L38 30 km strectched grid.
